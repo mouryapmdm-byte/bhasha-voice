@@ -1,0 +1,205 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // 0. Global Safety Net
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // Phase 3: Primitives
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isEmailVerified() {
+      return isSignedIn() && request.auth.token.email_verified == true;
+    }
+
+    function isValidId(id) {
+      return id is string && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
+    }
+
+    function incoming() {
+      return request.resource.data;
+    }
+
+    function existing() {
+      return resource.data;
+    }
+
+    // Helper for SharedPlaylist validation
+    function isValidSharedPlaylist(data) {
+      return data.keys().hasAll(['name', 'ownerId', 'ownerEmail', 'collaborators', 'collaboratorRoles', 'createdAt', 'updatedAt'])
+        && data.keys().size() == 7
+        && data.name is string && data.name.size() >= 1 && data.name.size() <= 100
+        && data.ownerId is string && data.ownerId == request.auth.uid
+        && data.ownerEmail is string && data.ownerEmail == request.auth.token.email
+        && data.collaborators is list && data.collaborators.size() <= 20
+        && data.collaboratorRoles is map
+        && data.createdAt is timestamp && (data.createdAt == request.time || data.createdAt == existing().createdAt)
+        && data.updatedAt is timestamp && data.updatedAt == request.time;
+    }
+
+    // Helper for PlaylistItem validation
+    function isValidPlaylistItem(data) {
+      return data.keys().hasAll(['text', 'url', 'authorId', 'authorName', 'timestamp'])
+        && (data.keys().size() == 5 || (data.keys().size() == 6 && data.keys().hasAny(['tags'])))
+        && data.text is string && data.text.size() <= 60000
+        && data.url is string && data.url.size() <= 2048
+        && data.authorId is string && data.authorId == request.auth.uid
+        && data.authorName is string && data.authorName.size() <= 100
+        && data.timestamp is timestamp && data.timestamp == request.time;
+    }
+
+    // Helper for Comment validation
+    function isValidComment(data) {
+      return data.keys().hasAll(['text', 'userId', 'userName', 'timestamp'])
+        && data.keys().size() == 4
+        && data.text is string && data.text.size() <= 10000
+        && data.userId is string && data.userId == request.auth.uid
+        && data.userName is string && data.userName.size() <= 100
+        && data.timestamp is timestamp && data.timestamp == request.time;
+    }
+
+    // Helper for Notification validation
+    function isValidNotification(data) {
+      return data.keys().hasAll(['recipientUid', 'senderName', 'message', 'playlistId', 'itemId', 'timestamp', 'isRead'])
+        && data.keys().size() == 7
+        && data.recipientUid is string
+        && data.senderName is string
+        && data.message is string
+        && data.playlistId is string
+        && data.itemId is string
+        && data.timestamp is timestamp && data.timestamp == request.time
+        && data.isRead is bool;
+    }
+
+    // Helper for Script validation
+    function isValidScript(data) {
+      return data.keys().hasAll(['title', 'content', 'lastAuthorId', 'lastAuthorName', 'updatedAt'])
+        && data.keys().size() == 5
+        && data.title is string && data.title.size() <= 200
+        && data.content is string && data.content.size() <= 100000
+        && data.lastAuthorId is string && data.lastAuthorId == request.auth.uid
+        && data.lastAuthorName is string && data.lastAuthorName.size() <= 100
+        && data.updatedAt is timestamp && data.updatedAt == request.time;
+    }
+
+    // Helper for ListenEvent validation
+    function isValidListenEvent(data) {
+      return data.keys().hasAll(['userId', 'userName', 'timestamp', 'duration'])
+        && data.keys().size() == 4
+        && data.userId is string && data.userId == request.auth.uid
+        && data.userName is string && data.userName.size() <= 100
+        && data.timestamp is timestamp && data.timestamp == request.time
+        && data.duration is number && data.duration >= 0;
+    }
+
+    // Core Logic
+    function isOwner(playlistData) {
+      return isSignedIn() && playlistData.ownerId == request.auth.uid;
+    }
+
+    function isCollaborator(playlistData) {
+      return isSignedIn() && request.auth.token.email in playlistData.collaborators;
+    }
+
+    function isEditor(playlistData) {
+      return isOwner(playlistData) || (isSignedIn() && playlistData.get('collaboratorRoles', {}).get(request.auth.token.email, 'viewer') == 'editor');
+    }
+
+    // 1. Users Collection (for lookups)
+    match /users/{userId} {
+      allow get: if isSignedIn();
+      allow list: if isSignedIn();
+      allow write: if isSignedIn() && request.auth.uid == userId;
+    }
+
+    // 2. Notifications
+    match /notifications/{notificationId} {
+      allow get: if isSignedIn() && resource.data.recipientUid == request.auth.uid;
+      allow list: if isSignedIn() && resource.data.recipientUid == request.auth.uid;
+      allow create: if isSignedIn() && isValidNotification(incoming());
+      allow update: if isSignedIn() && resource.data.recipientUid == request.auth.uid && incoming().diff(existing()).affectedKeys().hasOnly(['isRead']);
+      allow delete: if isSignedIn() && resource.data.recipientUid == request.auth.uid;
+    }
+
+    // 4. Content Tasks
+    match /contentTasks/{taskId} {
+      allow list: if isSignedIn() && resource.data.userId == request.auth.uid;
+      allow get: if isSignedIn() && resource.data.userId == request.auth.uid;
+      allow create: if isSignedIn() && incoming().userId == request.auth.uid;
+      allow update: if isSignedIn() && resource.data.userId == request.auth.uid && incoming().userId == request.auth.uid;
+      allow delete: if isSignedIn() && resource.data.userId == request.auth.uid;
+    }
+
+    // 5. Brand Assets
+    match /brandAssets/{assetId} {
+      allow list: if isSignedIn() && resource.data.userId == request.auth.uid;
+      allow get: if isSignedIn() && resource.data.userId == request.auth.uid;
+      allow create: if isSignedIn() && incoming().userId == request.auth.uid;
+      allow update: if isSignedIn() && resource.data.userId == request.auth.uid && incoming().userId == request.auth.uid;
+      allow delete: if isSignedIn() && resource.data.userId == request.auth.uid;
+    }
+
+    // 3. Shared Playlists
+    match /shared_playlists/{playlistId} {
+      allow get: if isSignedIn() && (isOwner(existing()) || isCollaborator(existing())) && isValidId(playlistId);
+      allow list: if isSignedIn() && (resource.data.ownerId == request.auth.uid || request.auth.token.email in resource.data.collaborators);
+      
+      allow create: if isEmailVerified() && isValidId(playlistId) && isValidSharedPlaylist(incoming());
+      
+      allow update: if isEmailVerified() && isValidId(playlistId) && (
+        // Only owner can update metadata and roles
+        (isOwner(existing()) && 
+         incoming().ownerId == existing().ownerId && 
+         incoming().ownerEmail == existing().ownerEmail &&
+         incoming().createdAt == existing().createdAt &&
+         incoming().updatedAt == request.time &&
+         isValidSharedPlaylist(incoming())
+        )
+      );
+
+      allow delete: if isOwner(existing());
+
+      // Shared Scripts
+      match /scripts/{scriptId} {
+        function getPlaylist() {
+          return get(/databases/$(database)/documents/shared_playlists/$(playlistId)).data;
+        }
+        allow read, list: if isSignedIn() && (isOwner(getPlaylist()) || isCollaborator(getPlaylist())) && isValidId(scriptId);
+        allow create: if isEmailVerified() && isEditor(getPlaylist()) && isValidScript(incoming());
+        allow update: if isEmailVerified() && isEditor(getPlaylist()) && isValidScript(incoming());
+        allow delete: if isEmailVerified() && (isOwner(getPlaylist()) || existing().lastAuthorId == request.auth.uid);
+      }
+
+      // Subcollections
+      match /items/{itemId} {
+        function getPlaylist() {
+          return get(/databases/$(database)/documents/shared_playlists/$(playlistId)).data;
+        }
+
+        allow read, list: if isSignedIn() && (isOwner(getPlaylist()) || isCollaborator(getPlaylist())) && isValidId(itemId);
+        
+        allow create: if isEmailVerified() && isValidId(itemId) && isEditor(getPlaylist()) && isValidPlaylistItem(incoming());
+        
+        allow update: if false; 
+        allow delete: if isEmailVerified() && (isOwner(getPlaylist()) || existing().authorId == request.auth.uid);
+
+        match /comments/{commentId} {
+          allow read, list: if isSignedIn() && (isOwner(getPlaylist()) || isCollaborator(getPlaylist())) && isValidId(commentId);
+          allow create: if isEmailVerified() && isValidId(commentId) && (isOwner(getPlaylist()) || isCollaborator(getPlaylist())) && isValidComment(incoming());
+          allow delete: if isEmailVerified() && (isOwner(getPlaylist()) || existing().userId == request.auth.uid);
+        }
+
+        match /analytics/{eventId} {
+          function getPlaylist() {
+            return get(/databases/$(database)/documents/shared_playlists/$(playlistId)).data;
+          }
+          allow read, list: if isSignedIn() && (isOwner(getPlaylist()) || isCollaborator(getPlaylist())) && isValidId(eventId);
+          allow create: if isEmailVerified() && (isOwner(getPlaylist()) || isCollaborator(getPlaylist())) && isValidListenEvent(incoming());
+        }
+      }
+    }
+  }
+}

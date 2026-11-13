@@ -1,0 +1,19 @@
+1789:  const [socialFormat, setSocialFormat] = useState<'Standard' | 'TikTok' | 'YouTube' | 'Podcast' | 'Facebook' | 'Twitter' | 'X'>('Standard');
+1824:      const textResponse = await genAIResponse("gemini-2.0-flash", [{ role: "user", parts: [{ text: `Generate a compelling ${socialFormat} caption for this voiceover script. Include emojis and relevant hashtags. Script: ${text.substring(0, 1000)}` }] }]);
+1851:        Provide a brief "Performance Review" comparing their emotional resonance, clarity, and suitability for ${socialFormat}. Which one would you recommend and why?` }] 
+2728:    const platform = socialFormat !== 'Standard' ? socialFormat : 'YouTube';
+2755:    const platform = socialFormat !== 'Standard' ? socialFormat : 'YouTube';
+2774:    const platform = socialFormat !== 'Standard' ? socialFormat : 'YouTube';
+3007:      const prompt = `Analyze the following script and generate 5 punchy, viral-style hooks (opening lines) for ${socialFormat}. 
+3064:      const prompt = `Extract 10 high-intent, SEO-optimized keywords/hashtags from this script for ${socialFormat} search algorithms.
+3081:    const folder = zip.folder(`${socialFormat.toLowerCase()}_assets`);
+3086:      scriptContent += `\n\n--- ${socialFormat === 'Podcast' ? 'TIMESTAMPS' : 'CHAPTERS'} ---\n` + socialChapters.map(c => `${c.timestamp} ${c.title}`).join('\n');
+3102:    let metaContent = `PLATFORM: ${socialFormat}\nDATE: ${new Date().toLocaleDateString()}\n\n`;
+3163:    zip.file(`${socialFormat.toLowerCase()}_platform_data.txt`, metaContent);
+3166:    saveAs(content, `${socialFormat.toLowerCase()}_bundle.zip`);
+6020:                                socialFormat === fmt 
+8158:                                            <MonitorPlay size={12} /> Optimization for {socialFormat}
+8161:                                            {socialFormat === 'TikTok' && "High-energy frequency response enabled. Audio sharpened for mobile speakers and heavy background music mixing."}
+8162:                                            {socialFormat === 'YouTube' && "Mid-range focused normalization. Optimized for desktop high-fidelity speakers and long-form narration padding."}
+8163:                                            {socialFormat === 'Podcast' && "Deep frequency warmth added. Simulating proximity effect for intimate, high-quality professional microphone presence."}
+8164:                                            {socialFormat === 'Standard' && "Balanced profile for general web and application usage."}

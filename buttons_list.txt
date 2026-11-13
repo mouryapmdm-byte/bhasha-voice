@@ -1,0 +1,255 @@
+152:        <button onClick={() => skip(-10)} className="text-[#C4C7C5] hover:text-white transition-colors flex-shrink-0" title="Skip back 10s">
+155:        <button onClick={togglePlay} className="p-2 bg-indigo-500 hover:bg-indigo-600 text-white rounded-full transition-colors flex-shrink-0">
+158:        <button onClick={() => skip(10)} className="text-[#C4C7C5] hover:text-white transition-colors flex-shrink-0" title="Skip forward 10s">
+175:          <button onClick={downloadAudio} className="text-[#C4C7C5] hover:text-white transition-colors" title="Download Audio">
+178:          <button onClick={toggleMute} className="text-[#C4C7C5] hover:text-white transition-colors">
+220:  <button 
+4369:          <button 
+4385:              <button
+4396:                <button
+4409:                <button
+4444:                  <button
+4556:                  <button 
+4575:              <button 
+4618:                    <button 
+4705:                <button 
+4714:                <button 
+4726:                  <button 
+4752:                <button 
+4760:                <button 
+4767:                <button 
+4775:                <button 
+4822:                  <button 
+4842:                    <button 
+4897:                  <button 
+4911:              <button 
+4948:                    <button 
+4980:              <button 
+4996:              <button 
+5023:              <button 
+5045:          <button 
+5058:          <button 
+5069:          <button 
+5101:            <button 
+5157:                     <button 
+5183:                   <button onClick={() => setCommandFeedback(null)} className="text-white/50 hover:text-white"><X size={10} /></button>
+5200:                <button 
+5212:                  <button 
+5221:                <button 
+5257:                  <button 
+5283:                          <button 
+5321:                                  <button onClick={() => markNotificationRead(n.id)} className="p-2 bg-[#1E1F20]/50 text-[#C4C7C5] hover:bg-slate-100 hover:text-white rounded-xl transition-all border border-white/20 shadow-sm"><ThumbsUp size={12} /></button>
+5323:                                <button onClick={() => deleteNotification(n.id)} className="p-2 bg-red-500/10 text-red-500 hover:bg-red-500 hover:text-white rounded-xl transition-all border border-red-500/10 shadow-sm"><Trash2 size={12} /></button>
+5358:                              <button 
+5372:                        <button 
+5398:                           <button 
+5435:                                 <button 
+5445:                                 <button 
+5460:                            <button 
+5470:                             <button 
+5493:                            <button title="Replay" onClick={() => { setText(h.text); setAudioUrl(h.url); }} className="p-2.5 bg-white/[0.03] text-[#C4C7C5] hover:bg-indigo-500 hover:text-white rounded-2xl transition-all"><Play size={16} /></button>
+5494:                             <button onClick={() => addToPlaylist(h)} title="Add to Playlist" className="p-2.5 text-[#8E918F] hover:text-white hover:bg-white/10 rounded-2xl transition-all"><Plus size={16} /></button>
+5495:                             <button onClick={() => {
+5514:                            <button onClick={() => { navigator.clipboard.writeText(h.text); }} title="Copy Text" className="p-2.5 text-[#8E918F] hover:text-[#C4C7C5] hover:bg-white/10 rounded-2xl transition-all"><Share2 size={16} /></button>
+5515:                            <button onClick={() => exportAsPDF(h)} title="Export PDF" className="p-2.5 text-[#8E918F] hover:text-red-400 hover:bg-white/10 rounded-2xl transition-all"><BookOpen size={16} /></button>
+5516:                            <button onClick={() => deleteHistoryItem(h.id)} title="Delete" className="p-2.5 text-[#8E918F] hover:text-red-600 hover:bg-white/10 rounded-2xl transition-all"><Trash2 size={16} /></button>
+5557:                                <button 
+5598:                                  <button 
+5610:                                  <button 
+5626:                                  <button 
+5634:                                  <button 
+5646:                                <button 
+5667:                              <button 
+5678:                              <button 
+5730:                          <button 
+5787:                            <button 
+5805:                              <button onClick={() => setFetchedVideoTitle(null)} className="text-[#8E918F] hover:text-white"><X size={10} /></button>
+5818:                            <button onClick={() => setText('')} className="hover:text-white transition-colors">Clear</button>
+5819:                            <button onClick={handleRefineScript} className="hover:text-indigo-400 transition-colors flex items-center gap-1">
+5851:                              <button onClick={() => setScriptChapters(null)} className="text-[#8E918F] hover:text-white"><X size={14} /></button>
+5855:                                <button 
+5879:                              <button 
+5886:                              <button 
+5918:                          <button 
+5933:                          <button 
+5961:                          <button 
+6008:                            <button
+6029:                            <button
+6055:                          <button
+6063:                          <button
+6071:                          <button
+6148:                            <button
+6257:                          <button
+6298:                          <button
+6315:                            <button
+6358:                            <button
+6372:                          <button
+6423:                           <button 
+6476:                                     <button 
+6536:                             <button 
+6600:                                 <button 
+6611:                                 <button 
+6623:                              <button 
+6669:                    <button onClick={handleCreateProject} className="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors">
+6744:                                <button
+6759:                              <button onClick={() => setAgentSelectedLangs(LANGUAGES.map(l => l.name))} className="text-[9px] font-black uppercase text-indigo-400 hover:text-white transition-colors">Select All</button>
+6760:                              <button onClick={() => setAgentSelectedLangs([])} className="text-[9px] font-black uppercase text-[#8E918F] hover:text-white transition-colors">Deselect All</button>
+6787:                                  <button 
+6805:                            <button
+6819:                              <button onClick={clearAgent} className="w-full py-3 text-[10px] font-black uppercase tracking-widest text-[#8E918F] hover:text-white transition-colors"> Reset Agent</button>
+6846:                          <button 
+6944:                            <button 
+6955:                              <button 
+6992:                                         <button
+7016:                                         <button 
+7160:                                              <button 
+7166:                                              <button 
+7218:                                                    <button onClick={() => navigator.clipboard.writeText(result.variants!.A)} className="text-[#8E918F] hover:text-white transition-colors"><Copy size={10} /></button>
+7225:                                                    <button onClick={() => navigator.clipboard.writeText(result.variants!.B)} className="text-[#8E918F] hover:text-white transition-colors"><Copy size={10} /></button>
+7267:                                                <button className="text-white hover:text-indigo-400 transition-colors"><Volume2 size={12} /></button>
+7273:                                            <button 
+7324:                                                     <button 
+7335:                                                        <button 
+7391:                      <button
+7414:                         <button onClick={handleDownloadBatchZip} className="flex items-center gap-2 text-xs font-black uppercase tracking-widest text-[#C4C7C5] hover:text-indigo-300 transition-colors">
+7430:                               <button 
+7470:                        <button 
+7476:                        <button 
+7530:                      <button 
+7602:                            <button className="text-[10px] font-bold text-white/50 hover:text-white uppercase tracking-widest transition-colors">Add Segment</button>
+7603:                            <button className="text-[10px] font-bold text-white/50 hover:text-white uppercase tracking-widest transition-colors">Auto-Sync All</button>
+7645:                                        <button className="p-1.5 hover:bg-white/10 rounded-lg text-white/30 hover:text-indigo-400 transition-colors"><RotateCcw size={14} /></button>
+7646:                                        <button className="p-1.5 hover:bg-white/10 rounded-lg text-white/30 hover:text-red-400 transition-all" title="Delete Segment"><Trash2 size={14} /></button>
+7665:                               <button className="px-4 py-2 text-[10px] font-black uppercase text-white hover:bg-white/5 rounded-lg transition-all">Video + Audio</button>
+7666:                               <button className="px-4 py-2 text-[10px] font-black uppercase text-white/50 hover:text-white rounded-lg transition-all">Audio Only</button>
+7667:                               <button className="px-4 py-2 text-[10px] font-black uppercase text-white/50 hover:text-white rounded-lg transition-all">SRT</button>
+7669:                            <button className="bg-indigo-500 hover:bg-indigo-600 px-6 py-2 rounded-xl text-[10px] font-black uppercase tracking-widest text-white shadow-lg shadow-indigo-500/20 transition-all flex items-center gap-2">
+7672:                            <button className="bg-emerald-600 hover:bg-emerald-700 px-6 py-2 rounded-xl text-[10px] font-black uppercase tracking-widest text-white shadow-lg shadow-emerald-500/20 transition-all">
+7685:                  <button className="mt-8 px-8 py-3 bg-indigo-500 text-white rounded-xl text-xs font-black uppercase tracking-widest hover:bg-indigo-600">Train Persona</button>
+7692:                  <button className="mt-8 px-8 py-3 bg-indigo-500 text-white rounded-xl text-xs font-black uppercase tracking-widest hover:bg-indigo-600">Start Chat</button>
+7699:                  <button className="mt-8 px-8 py-3 bg-indigo-500 text-white rounded-xl text-xs font-black uppercase tracking-widest hover:bg-indigo-600">Open Editor</button>
+7706:                  <button className="mt-8 px-8 py-3 bg-indigo-500 text-white rounded-xl text-xs font-black uppercase tracking-widest hover:bg-indigo-600">Join Session</button>
+7713:                  <button className="mt-8 px-8 py-3 bg-indigo-500 text-white rounded-xl text-xs font-black uppercase tracking-widest hover:bg-indigo-600">Start Cleanup</button>
+7736:                        <button 
+7801:                              <button onClick={() => setSelectedSharedPlaylist(null)} className="p-2 text-[#8E918F] hover:text-white"><Plus className="rotate-45" size={20} /></button>
+7812:                                  <button 
+7819:                                <button 
+7826:                              <button 
+7856:                                                <button 
+7868:                                                    <button 
+7881:                                                    <button 
+7905:                                                <button 
+7916:                                                <button 
+7941:                                              <button onClick={() => deleteSharedItem(selectedSharedPlaylist.id, item.id)} className="p-1.5 text-[#8E918F] hover:text-red-500 transition-all"><Trash2 size={14} /></button>
+7954:                                <button 
+7965:                                     <button 
+7980:                                         <button 
+7995:                                           <button onClick={() => setActiveScript(null)} className="text-[8px] font-black uppercase text-red-400 tracking-widest">Close Editor</button>
+8026:                                       <button 
+8056:                                            <button className="w-full py-2 bg-slate-100/10 hover:bg-[#1E1F20]/50 text-[#C4C7C5] border border-white/20 rounded-xl text-xs font-bold uppercase tracking-widest transition-all">
+8062:                                            <button 
+8079:                                            <button 
+8145:                                              <button 
+8272:                <button 
+8278:                <button 
+8321:                  <button 
+8345:                          <button
+8407:                    <button
+8425:                     <button
+8431:                      <button
+8475:                <button onClick={() => setIsPacingCoachActive(false)} className="w-full p-3 bg-indigo-500 rounded-xl text-white">Stop & Finish</button>
+8500:                      <button 
+8522:                                    <button
+8545:                      <button 
+8551:                      <button 
+8603:                      <button 
+8643:                          <button className="w-full py-4 bg-emerald-600 hover:bg-emerald-500 text-white rounded-2xl text-xs font-black uppercase tracking-widest transition-all shadow-xl shadow-emerald-900/20">
+8660:                          <button className="px-6 py-3 bg-white/[0.03] hover:bg-white/10 text-white rounded-xl text-xs font-black uppercase tracking-widest border border-[#333537]">Adjust Mood</button>
+8661:                          <button className="px-6 py-3 bg-white/[0.03] hover:bg-white/10 text-white rounded-xl text-xs font-black uppercase tracking-widest border border-[#333537]">Flag Take</button>
+8689:                      <button 
+8710:                                <button 
+8771:                        <button 
+8777:                        <button 
+8842:                    <button 
+8848:                    <button 
+8889:                  <button 
+8918:                                 <button 
+8951:                   <button 
+8957:                   <button 
+9035:                        <button 
+9049:                        <button 
+9084:                      <button 
+9092:                      <button 
+9102:                    <button 
+9148:                  <button 
+9155:                  <button 
+9200:                    <button 
+9215:                    <button 
+9229:                    <button 
+9243:                    <button 
+9256:                    <button 
+9269:                    <button 
+9283:                    <button 
+9297:                    <button 
+9313:                    <button 
+9328:                    <button 
+9359:                      <button 
+9373:                     <button 
+9387:                    <button 
+9402:                    <button 
+9417:                    <button 
+9432:                    <button 
+9449:                    <button 
+9464:                    <button 
+9479:                    <button 
+9509:                       <button 
+9525:                    <button 
+9537:                    <button 
+9549:                    <button 
+9568:                    <button 
+9580:                    <button 
+9592:                    <button 
+9604:                    <button 
+9616:                    <button 
+9628:                    <button 
+9653:                   <button 
+9679:                    <button onClick={() => copyToClipboard(repurposedContent.content, repurposedContent.platform + ' content')} className="p-1.5 text-indigo-400 hover:text-black hover:bg-indigo-400/10 rounded-lg">
+9682:                    <button onClick={() => setRepurposedContent(null)} className="text-gray-400 hover:text-black transition-colors p-1">
+9690:                <button onClick={() => setRepurposedContent(null)} className="w-full py-3 bg-white/[0.03] hover:bg-white/10 text-white hover:text-black rounded-xl text-[10px] font-black uppercase tracking-widest transition-all">Close</button>
+9709:                    <button onClick={() => copyToClipboard(competitorAnalysis, 'Analysis')} className="p-1.5 text-indigo-400 hover:text-black hover:bg-indigo-400/10 rounded-lg">
+9712:                    <button onClick={() => setCompetitorAnalysis(null)} className="text-gray-400 hover:text-black transition-colors p-1">
+9720:                <button onClick={() => setCompetitorAnalysis(null)} className="w-full py-3 bg-white/[0.03] hover:bg-white/10 text-white hover:text-black rounded-xl text-[10px] font-black uppercase tracking-widest transition-all">Close</button>
+9738:                  <button onClick={() => setSeoData(null)} className="text-gray-400 hover:text-black transition-colors p-1">
+9748:                        <button onClick={() => copyToClipboard(t, 'Title')} className="text-indigo-400 hover:text-black opacity-0 group-hover:opacity-100 transition-all p-1"><Copy size={14} /></button>
+9761:                <button onClick={() => setSeoData(null)} className="w-full py-3 bg-white/[0.03] hover:bg-white/10 text-white hover:text-black rounded-xl text-[10px] font-black uppercase tracking-widest">Close</button>
+9779:                  <button onClick={() => setSocialChapters(null)} className="text-gray-400 hover:text-black p-1"><X size={18} /></button>
+9786:                       <button onClick={() => copyToClipboard(`${c.timestamp} ${c.title}`, 'Chapter')} className="opacity-0 group-hover:opacity-100 hover:text-black p-1"><Copy size={12} /></button>
+9790:                 <button onClick={() => setSocialChapters(null)} className="w-full py-3 bg-white/[0.03] hover:bg-white/10 text-white hover:text-black rounded-xl text-[10px] font-black uppercase tracking-widest">Close</button>
+9808:                  <button onClick={() => setThumbnailConcepts(null)} className="text-gray-400 hover:text-black p-1"><X size={18} /></button>
+9815:                         <button onClick={() => copyToClipboard(c.prompt, 'Prompt')} className="text-gray-500 hover:text-black p-1"><Copy size={12} /></button>
+9822:                <button onClick={() => setThumbnailConcepts(null)} className="w-full py-3 bg-white/[0.03] hover:bg-white/10 text-white hover:text-black rounded-xl text-[10px] font-black uppercase tracking-widest">Close</button>
+9840:                  <button onClick={() => setVisualCues(null)} className="text-gray-400 hover:text-black p-1"><X size={18} /></button>
+9845:                <button onClick={() => setVisualCues(null)} className="w-full py-3 bg-white/[0.03] hover:bg-white/10 text-white hover:text-black rounded-xl text-[10px] font-black uppercase tracking-widest">Close</button>
+9863:                  <button onClick={() => setConceptTesting(null)} className="text-gray-400 hover:text-black p-1"><X size={18} /></button>
+9873:                <button onClick={() => setConceptTesting(null)} className="w-full py-3 bg-white/[0.03] hover:bg-white/10 text-white hover:text-black rounded-xl text-[10px] font-black uppercase tracking-widest">Close</button>
+9891:                  <button onClick={() => setPolls(null)} className="text-gray-400 hover:text-black p-1"><X size={18} /></button>
+9905:                <button onClick={() => setPolls(null)} className="w-full py-3 bg-white/[0.03] hover:bg-white/10 text-white hover:text-black rounded-xl text-[10px] font-black uppercase tracking-widest">Close</button>
+9923:                  <button onClick={() => setViralHooks(null)} className="text-gray-400 hover:text-black p-1"><X size={18} /></button>
+9930:                         <button onClick={() => copyToClipboard(h.text, 'Hook')} className="opacity-0 group-hover:opacity-100 hover:text-black text-indigo-400 p-1"><Copy size={11} /></button>
+9936:                <button onClick={() => setViralHooks(null)} className="w-full py-3 bg-white/[0.03] hover:bg-white/10 text-white hover:text-black rounded-xl text-[10px] font-black uppercase tracking-widest">Close</button>
+9954:                  <button onClick={() => setCtaLibrary(null)} className="text-gray-400 hover:text-black p-1"><X size={18} /></button>
+9960:                       <button onClick={() => copyToClipboard(c, 'CTA')} className="opacity-0 group-hover:opacity-100 hover:text-black text-indigo-400 p-1"><Copy size={14} /></button>
+9964:                <button onClick={() => setCtaLibrary(null)} className="w-full py-3 bg-white/[0.03] hover:bg-white/10 text-white hover:text-black rounded-xl text-[10px] font-black uppercase tracking-widest">Close</button>
+9982:                  <button onClick={() => setScriptVitals(null)} className="text-gray-400 hover:text-black p-1"><X size={18} /></button>
+10005:                <button onClick={() => setScriptVitals(null)} className="w-full py-3 bg-white/[0.03] hover:bg-white/10 text-white hover:text-black rounded-xl text-[10px] font-black uppercase tracking-widest">Close</button>
+10023:                  <button onClick={() => setExtractedKeywords(null)} className="text-gray-400 hover:text-black p-1"><X size={18} /></button>
+10031:                  <button 
+10037:                  <button onClick={() => setExtractedKeywords(null)} className="flex-1 py-3 bg-white/[0.03] hover:bg-white/10 text-white hover:text-black rounded-xl text-[10px] font-black uppercase tracking-widest">Close</button>
+10082:                   <button 
+10123:                  <button 
+10129:                  <button 
+10165:                  <button 
+10195:                  <button 
+10233:                      <button 
+10254:                  <button 
+10260:                  <button 

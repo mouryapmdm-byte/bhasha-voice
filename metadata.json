@@ -1,0 +1,6 @@
+{
+  "name": "Bharat Performance Agent",
+  "description": "An elite multi-territory sync agent that extracts intelligence, performs trend research, and localizes narratives across 23+ Bharat languages with automated social distribution.",
+  "requestFramePermissions": ["microphone", "camera"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

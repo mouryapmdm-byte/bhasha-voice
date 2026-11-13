@@ -1,0 +1,86 @@
+export const LANGUAGES = [
+  { code: 'hi-IN', name: 'Hindi', voices: [
+    { id: 'hi-IN-Wavenet-A', name: 'Wavenet-A', gender: 'FEMALE' },
+    { id: 'hi-IN-Wavenet-B', name: 'Wavenet-B', gender: 'MALE' },
+    { id: 'hi-IN-Wavenet-C', name: 'Wavenet-C', gender: 'FEMALE' },
+    { id: 'hi-IN-Wavenet-D', name: 'Wavenet-D', gender: 'MALE' },
+  ]},
+  { code: 'bn-IN', name: 'Bengali', voices: [
+    { id: 'bn-IN-Wavenet-A', name: 'Wavenet-A', gender: 'FEMALE' },
+    { id: 'bn-IN-Wavenet-B', name: 'Wavenet-B', gender: 'MALE' },
+    { id: 'bn-IN-Wavenet-C', name: 'Wavenet-C', gender: 'FEMALE' },
+    { id: 'bn-IN-Wavenet-D', name: 'Wavenet-D', gender: 'MALE' },
+  ]},
+  { code: 'gu-IN', name: 'Gujarati', voices: [
+    { id: 'gu-IN-Wavenet-A', name: 'Wavenet-A', gender: 'FEMALE' },
+    { id: 'gu-IN-Wavenet-B', name: 'Wavenet-B', gender: 'MALE' },
+    { id: 'gu-IN-Wavenet-C', name: 'Wavenet-C', gender: 'FEMALE' },
+    { id: 'gu-IN-Wavenet-D', name: 'Wavenet-D', gender: 'MALE' },
+  ]},
+  { code: 'kn-IN', name: 'Kannada', voices: [
+    { id: 'kn-IN-Wavenet-A', name: 'Wavenet-A', gender: 'FEMALE' },
+    { id: 'kn-IN-Wavenet-B', name: 'Wavenet-B', gender: 'MALE' },
+    { id: 'kn-IN-Wavenet-C', name: 'Wavenet-C', gender: 'FEMALE' },
+    { id: 'kn-IN-Wavenet-D', name: 'Wavenet-D', gender: 'MALE' },
+  ]},
+  { code: 'ml-IN', name: 'Malayalam', voices: [
+    { id: 'ml-IN-Wavenet-A', name: 'Wavenet-A', gender: 'FEMALE' },
+    { id: 'ml-IN-Wavenet-B', name: 'Wavenet-B', gender: 'MALE' },
+    { id: 'ml-IN-Wavenet-C', name: 'Wavenet-C', gender: 'FEMALE' },
+    { id: 'ml-IN-Wavenet-D', name: 'Wavenet-D', gender: 'MALE' },
+  ]},
+  { code: 'mr-IN', name: 'Marathi', voices: [
+    { id: 'mr-IN-Wavenet-A', name: 'Wavenet-A', gender: 'FEMALE' },
+    { id: 'mr-IN-Wavenet-B', name: 'Wavenet-B', gender: 'MALE' },
+    { id: 'mr-IN-Wavenet-C', name: 'Wavenet-C', gender: 'FEMALE' },
+    { id: 'mr-IN-Wavenet-D', name: 'Wavenet-D', gender: 'MALE' },
+  ]},
+  { code: 'pa-IN', name: 'Punjabi', voices: [
+    { id: 'pa-IN-Wavenet-A', name: 'Wavenet-A', gender: 'FEMALE' },
+    { id: 'pa-IN-Wavenet-B', name: 'Wavenet-B', gender: 'MALE' },
+    { id: 'pa-IN-Wavenet-C', name: 'Wavenet-C', gender: 'FEMALE' },
+    { id: 'pa-IN-Wavenet-D', name: 'Wavenet-D', gender: 'MALE' },
+  ]},
+  { code: 'ta-IN', name: 'Tamil', voices: [
+    { id: 'ta-IN-Wavenet-A', name: 'Wavenet-A', gender: 'FEMALE' },
+    { id: 'ta-IN-Wavenet-B', name: 'Wavenet-B', gender: 'MALE' },
+    { id: 'ta-IN-Wavenet-C', name: 'Wavenet-C', gender: 'FEMALE' },
+    { id: 'ta-IN-Wavenet-D', name: 'Wavenet-D', gender: 'MALE' },
+  ]},
+  { code: 'te-IN', name: 'Telugu', voices: [
+    { id: 'te-IN-Wavenet-A', name: 'Wavenet-A', gender: 'FEMALE' },
+    { id: 'te-IN-Wavenet-B', name: 'Wavenet-B', gender: 'MALE' },
+    { id: 'te-IN-Wavenet-C', name: 'Wavenet-C', gender: 'FEMALE' },
+    { id: 'te-IN-Wavenet-D', name: 'Wavenet-D', gender: 'MALE' },
+  ]},
+  { code: 'ur-IN', name: 'Urdu', voices: [
+    { id: 'ur-IN-Wavenet-A', name: 'Wavenet-A', gender: 'FEMALE' },
+    { id: 'ur-IN-Wavenet-B', name: 'Wavenet-B', gender: 'MALE' },
+    { id: 'ur-IN-Wavenet-C', name: 'Wavenet-C', gender: 'FEMALE' },
+    { id: 'ur-IN-Wavenet-D', name: 'Wavenet-D', gender: 'MALE' },
+  ]},
+  { code: 'en-IN', name: 'English (India)', voices: [
+    { id: 'en-IN-Wavenet-A', name: 'Wavenet-A', gender: 'FEMALE' },
+    { id: 'en-IN-Wavenet-B', name: 'Wavenet-B', gender: 'MALE' },
+    { id: 'en-IN-Wavenet-C', name: 'Wavenet-C', gender: 'FEMALE' },
+    { id: 'en-IN-Wavenet-D', name: 'Wavenet-D', gender: 'MALE' },
+  ]},
+  { code: 'as-IN', name: 'Assamese', voices: [] },
+  { code: 'brx-IN', name: 'Bodo', voices: [] },
+  { code: 'doi-IN', name: 'Dogri', voices: [] },
+  { code: 'ks-IN', name: 'Kashmiri', voices: [] },
+  { code: 'kok-IN', name: 'Konkani', voices: [] },
+  { code: 'mai-IN', name: 'Maithili', voices: [] },
+  { code: 'mni-IN', name: 'Manipuri', voices: [] },
+  { code: 'ne-IN', name: 'Nepali', voices: [] },
+  { code: 'or-IN', name: 'Odia', voices: [] },
+  { code: 'sa-IN', name: 'Sanskrit', voices: [] },
+  { code: 'sat-IN', name: 'Santali', voices: [] },
+  { code: 'sd-IN', name: 'Sindhi', voices: [] },
+];
+
+export const GENDERS = [
+  { id: 'ALL', name: 'All Genders' },
+  { id: 'FEMALE', name: 'Female' },
+  { id: 'MALE', name: 'Male' },
+];

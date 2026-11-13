@@ -1,0 +1,122 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // 0. Global Safety Net
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // Phase 3: Primitives
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isEmailVerified() {
+      return isSignedIn() && request.auth.token.email_verified == true;
+    }
+
+    function isValidId(id) {
+      return id is string && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
+    }
+
+    function incoming() {
+      return request.resource.data;
+    }
+
+    function existing() {
+      return resource.data;
+    }
+
+    // Helper for SharedPlaylist validation
+    function isValidSharedPlaylist(data) {
+      return data.keys().hasAll(['name', 'ownerId', 'ownerEmail', 'collaborators', 'createdAt', 'updatedAt'])
+        && data.keys().size() == 6
+        && data.name is string && data.name.size() >= 1 && data.name.size() <= 100
+        && data.ownerId is string && data.ownerId == request.auth.uid
+        && data.ownerEmail is string && data.ownerEmail == request.auth.token.email
+        && data.collaborators is list && data.collaborators.size() <= 20
+        && data.createdAt is timestamp && data.createdAt == request.time
+        && data.updatedAt is timestamp && data.updatedAt == request.time;
+    }
+
+    // Helper for PlaylistItem validation
+    function isValidPlaylistItem(data) {
+      return data.keys().hasAll(['text', 'url', 'authorId', 'authorName', 'timestamp'])
+        && (data.keys().size() == 5 || (data.keys().size() == 6 && data.keys().hasAny(['tags'])))
+        && data.text is string && data.text.size() <= 50000
+        && data.url is string && data.url.size() <= 2048
+        && data.authorId is string && data.authorId == request.auth.uid
+        && data.authorName is string && data.authorName.size() <= 100
+        && data.timestamp is timestamp && data.timestamp == request.time;
+    }
+
+    // Helper for Comment validation
+    function isValidComment(data) {
+      return data.keys().hasAll(['text', 'userId', 'userName', 'timestamp'])
+        && data.keys().size() == 4
+        && data.text is string && data.text.size() <= 10000
+        && data.userId is string && data.userId == request.auth.uid
+        && data.userName is string && data.userName.size() <= 100
+        && data.timestamp is timestamp && data.timestamp == request.time;
+    }
+
+    // Ownership Check
+    function isOwner(playlistData) {
+      return isSignedIn() && playlistData.ownerId == request.auth.uid;
+    }
+
+    // Collaborator Check
+    function isCollaborator(playlistData) {
+      return isSignedIn() && request.auth.token.email in playlistData.collaborators;
+    }
+
+    // 1. Shared Playlists
+    match /shared_playlists/{playlistId} {
+      allow get: if (isOwner(existing()) || isCollaborator(existing())) && isValidId(playlistId);
+      allow list: if isSignedIn() && (resource.data.ownerId == request.auth.uid || request.auth.token.email in resource.data.collaborators);
+      
+      allow create: if isEmailVerified() && isValidSharedPlaylist(incoming()) && isValidId(playlistId);
+      
+      allow update: if isEmailVerified() && isValidId(playlistId) && (
+        // Action: Owner updates all fields except immutable ones
+        (isOwner(existing()) && 
+         incoming().ownerId == existing().ownerId && 
+         incoming().ownerEmail == existing().ownerEmail &&
+         incoming().createdAt == existing().createdAt &&
+         incoming().updatedAt == request.time &&
+         incoming().keys().hasAll(['name', 'ownerId', 'ownerEmail', 'collaborators', 'createdAt', 'updatedAt']) &&
+         incoming().keys().size() == 6
+        ) ||
+        // Action: Collaborator updates only name maybe? (Let's say only owner can update metadata)
+        false
+      );
+
+      allow delete: if isOwner(existing());
+
+      // 2. Playlist Items
+      match /items/{itemId} {
+        function getPlaylist() {
+          return get(/databases/$(database)/documents/shared_playlists/$(playlistId)).data;
+        }
+
+        allow read: if (isOwner(getPlaylist()) || isCollaborator(getPlaylist())) && isValidId(itemId);
+        
+        allow create: if isEmailVerified() && isValidId(itemId) && (isOwner(getPlaylist()) || isCollaborator(getPlaylist())) && isValidPlaylistItem(incoming());
+        
+        // Items are generally immutable once created (generated audio)
+        allow update: if false; 
+        allow delete: if isEmailVerified() && (isOwner(getPlaylist()) || incoming().authorId == request.auth.uid);
+
+        // 3. Comments
+        match /comments/{commentId} {
+          allow read: if (isOwner(getPlaylist()) || isCollaborator(getPlaylist())) && isValidId(commentId);
+          
+          allow create: if isEmailVerified() && isValidId(commentId) && (isOwner(getPlaylist()) || isCollaborator(getPlaylist())) && isValidComment(incoming());
+          
+          allow update: if false; // Comments immutable
+          allow delete: if isEmailVerified() && (isOwner(getPlaylist()) || incoming().userId == request.auth.uid);
+        }
+      }
+    }
+  }
+}

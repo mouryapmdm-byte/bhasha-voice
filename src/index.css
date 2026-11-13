@@ -1,0 +1,223 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+  
+  --radius-xl: 1rem;
+  --radius-2xl: 1.5rem;
+  --radius-3xl: 2.5rem;
+}
+
+@layer base {
+  html, body {
+    @apply h-full;
+  }
+  body {
+    @apply bg-[#131314] text-[#E3E3E3] antialiased selection:bg-[#4285F4]/30;
+  background-image: none;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+}
+
+@layer utilities {
+  .bg-editor-grid {
+    background-image: 
+      radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.05) 1px, transparent 0);
+    background-size: 24px 24px;
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-slate-700 rounded-full hover:bg-slate-600 transition-colors;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 3px;
+  height: 3px;
+}
+
+/* Base interactive elements */
+button {
+  @apply active:scale-[0.98] transition-all duration-200;
+}
+
+/* Glassmorphism Classes */
+.glass {
+  @apply backdrop-blur-md bg-[#1E1F20]/60 border border-white/5;
+}
+
+.glass-dark {
+  @apply backdrop-blur-xl bg-[#1E1F20]/80 border border-white/5;
+}
+
+.glass-panel {
+  @apply backdrop-blur-2xl bg-[#1E1F20]/80 border border-white/10;
+}
+
+/* Modern Component Styles */
+.btn-primary {
+  @apply rounded-2xl hover:scale-[1.02] active:scale-[0.98] font-bold transition-all duration-300 shadow-xl shadow-purple-500/20 border-0 text-white;
+  background: linear-gradient(135deg, #4A90E2, #9013FE, #D0021B);
+  background-size: 300% 300%;
+  animation: gemini-flow 8s ease infinite;
+}
+
+.btn-secondary {
+  @apply bg-[#1E1F20] border border-[#444746] text-[#E3E3E3] hover:bg-[#282A2C] disabled:opacity-50 disabled:cursor-not-allowed hover:border-[#E3E3E3] transition-all font-medium;
+}
+
+.card-glass {
+  @apply bg-[#1E1F20]/80 backdrop-blur-2xl border border-[#444746] rounded-2xl;
+}
+
+.input-modern {
+  @apply bg-[#131314] border border-[#444746] rounded-xl px-4 py-3 text-[#E3E3E3] focus:outline-none focus:ring-1 focus:ring-[#E3E3E3] focus:border-[#E3E3E3] transition-all font-medium;
+}
+
+
+
+
+.gemini-bg {
+  color: white;
+  background: linear-gradient(135deg, #4A90E2, #9013FE, #D0021B);
+  background-size: 300% 300%;
+  animation: gemini-flow 8s ease infinite;
+}
+
+.gemini-bg:hover {
+  background-size: 200% 200%;
+}
+
+/* Markdown Styling */
+.markdown-body {
+  @apply text-inherit leading-relaxed;
+}
+
+.markdown-body h1 {
+  @apply text-2xl sm:text-3xl font-black tracking-tight text-white mt-6 mb-4 pb-2 border-b border-white/10;
+}
+
+.markdown-body h2 {
+  @apply text-xl sm:text-2xl font-bold tracking-tight text-white mt-5 mb-3 pb-1 border-b border-white/10;
+}
+
+.markdown-body h3 {
+  @apply text-lg sm:text-xl font-bold text-indigo-300 mt-4 mb-2;
+}
+
+.markdown-body h4, .markdown-body h5, .markdown-body h6 {
+  @apply text-base font-semibold text-slate-300 mt-3 mb-2;
+}
+
+.markdown-body hr {
+  @apply my-6 border-white/15;
+}
+
+/* Intact Table Styling - Continuous, Contiguous Gridlines */
+.markdown-body table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.25rem 0;
+  font-size: 0.8125rem;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  background-color: rgba(255, 255, 255, 0.02);
+}
+
+.markdown-body thead {
+  background-color: #1a1c1e;
+}
+
+.markdown-body th {
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  padding: 0.625rem 0.875rem;
+  font-weight: 700;
+  text-align: left;
+  color: #a5b4fc;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-size: 0.72rem;
+  white-space: nowrap;
+}
+
+.markdown-body td {
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  padding: 0.5rem 0.875rem;
+  color: #e2e8f0;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  min-height: 2rem;
+  line-height: 1.5;
+}
+
+.markdown-body tr:nth-child(even) td {
+  background-color: rgba(255, 255, 255, 0.015);
+}
+
+.markdown-body tr:hover td {
+  background-color: rgba(99, 102, 241, 0.08);
+}
+
+.markdown-body p {
+  @apply mb-4 leading-relaxed;
+}
+
+.markdown-body ul {
+  @apply mb-4 ml-6 list-disc space-y-1 text-slate-200;
+}
+
+.markdown-body ol {
+  @apply mb-4 ml-6 list-decimal space-y-1 text-slate-200;
+}
+
+.markdown-body li {
+  @apply pl-1 leading-relaxed;
+}
+
+.markdown-body blockquote {
+  @apply pl-4 border-l-4 border-indigo-500 italic my-4 text-slate-300 bg-indigo-500/[0.04] py-2 rounded-r-xl;
+}
+
+.markdown-body pre {
+  @apply bg-[#0d1117] p-4 rounded-xl my-4 overflow-auto font-mono text-xs border border-white/10 shadow-lg text-slate-200;
+}
+
+.markdown-body code {
+  @apply font-mono bg-white/10 px-1.5 py-0.5 rounded text-indigo-300 text-[0.9em];
+}
+
+.markdown-body a {
+  @apply text-indigo-400 hover:text-indigo-300 underline underline-offset-2 transition-colors;
+}
+
+@keyframes gemini-flow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.gemini-text {
+  background: linear-gradient(90deg, #4A90E2, #9013FE);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}

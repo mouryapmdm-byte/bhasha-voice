@@ -1,0 +1,238 @@
+{
+  "entities": {
+    "SharedPlaylist": {
+      "title": "Shared Playlist",
+      "description": "A collection of audio clips shared between a team or group.",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string", "description": "Name of the playlist/folder" },
+        "ownerId": { "type": "string", "description": "UID of the user who created it" },
+        "ownerEmail": { "type": "string", "description": "Email of the owner" },
+        "collaborators": { "type": "array", "items": { "type": "string" }, "description": "List of emails of invited collaborators" },
+        "collaboratorRoles": { 
+          "type": "object", 
+          "description": "Mapping of email to role (viewer|editor)",
+          "additionalProperties": { "type": "string", "enum": ["viewer", "editor"] }
+        },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["name", "ownerId", "ownerEmail", "createdAt", "updatedAt"]
+    },
+    "PlaylistItem": {
+      "title": "Playlist Item",
+      "description": "An individual audio clip within a shared playlist.",
+      "type": "object",
+      "properties": {
+        "text": { "type": "string", "description": "The script/text of the clip" },
+        "url": { "type": "string", "description": "The URL to the generated audio file" },
+        "authorId": { "type": "string" },
+        "authorName": { "type": "string" },
+        "timestamp": { "type": "string", "format": "date-time" },
+        "tags": { "type": "array", "items": { "type": "string" } }
+      },
+      "required": ["text", "url", "authorId", "authorName", "timestamp"]
+    },
+    "Comment": {
+      "title": "Comment",
+      "description": "A comment on a specific audio clip.",
+      "type": "object",
+      "properties": {
+        "text": { "type": "string" },
+        "userId": { "type": "string" },
+        "userName": { "type": "string" },
+        "timestamp": { "type": "string", "format": "date-time" }
+      },
+      "required": ["text", "userId", "userName", "timestamp"]
+    },
+    "Notification": {
+      "title": "Notification",
+      "description": "A notification for a user (e.g., a mention).",
+      "type": "object",
+      "properties": {
+        "recipientUid": { "type": "string" },
+        "senderName": { "type": "string" },
+        "message": { "type": "string" },
+        "playlistId": { "type": "string" },
+        "itemId": { "type": "string" },
+        "timestamp": { "type": "string", "format": "date-time" },
+        "isRead": { "type": "boolean" }
+      },
+      "required": ["recipientUid", "senderName", "message", "playlistId", "itemId", "timestamp", "isRead"]
+    },
+    "Script": {
+      "title": "Script",
+      "description": "A collaborative text document for a team folder.",
+      "type": "object",
+      "properties": {
+        "title": { "type": "string" },
+        "content": { "type": "string" },
+        "lastAuthorId": { "type": "string" },
+        "lastAuthorName": { "type": "string" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["title", "content", "lastAuthorId", "lastAuthorName", "updatedAt"]
+    },
+    "ListenEvent": {
+      "title": "Listen Event",
+      "description": "Tracking analytics for when a user listens to a clip.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "userName": { "type": "string" },
+        "timestamp": { "type": "string", "format": "date-time" },
+        "duration": { "type": "number", "description": "Seconds spent listening" }
+      },
+      "required": ["userId", "userName", "timestamp", "duration"]
+    },
+    "ReviewTopic": {
+      "title": "Review Topic",
+      "description": "Topics the user struggled with, flagged for review.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "topic": { "type": "string" },
+        "difficultyWhenStruggled": { "type": "number" },
+        "flaggedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "topic", "difficultyWhenStruggled", "flaggedAt"]
+    },
+    "Mastery": {
+      "title": "Mastery",
+      "description": "User mastery level per topic.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "topic": { "type": "string" },
+        "masteryLevel": { "type": "number" },
+        "lastUpdated": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "topic", "masteryLevel"]
+    },
+    "Analytics": {
+      "title": "Analytics Data",
+      "description": "User analytics data",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "platform": { "type": "string" },
+        "reach": { "type": "number" },
+        "engagement": { "type": "number" },
+        "timestamp": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "platform", "reach", "engagement", "timestamp"]
+    },
+    "Compliance": {
+      "title": "Compliance Results",
+      "description": "Results of brand compliance check",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "text": { "type": "string" },
+        "compliant": { "type": "boolean" },
+        "details": { "type": "string" },
+        "timestamp": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "text", "compliant", "timestamp"]
+    },
+    "ContentTask": {
+      "title": "Content Kanban Task",
+      "description": "Task for content lifecycle management",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "status": { "type": "string", "enum": ["Draft", "Review", "Approved", "Posted"] },
+        "assignedTo": { "type": "string" }
+      },
+      "required": ["id", "title", "status"]
+    },
+    "Project": {
+      "title": "Project",
+      "description": "A workspace for grouping scripts, audio clips, and music.",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "ownerId": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["name", "ownerId", "createdAt"]
+    },
+    "BrandAsset": {
+      "title": "Brand Asset",
+      "description": "Storage reference for brand assets",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "url": { "type": "string" }
+      },
+      "required": ["id", "name", "url"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": {
+        "type": "object",
+        "properties": {
+          "email": { "type": "string" },
+          "displayName": { "type": "string" },
+          "lastLogin": { "type": "string", "format": "date-time" }
+        }
+      },
+      "description": "User profiles for lookups."
+    },
+    "/notifications/{notificationId}": {
+      "schema": "Notification",
+      "description": "Global notifications for users."
+    },
+    "/shared_playlists/{playlistId}": {
+      "schema": "SharedPlaylist",
+      "description": "Root collection for shared playlists."
+    },
+    "/projects/{projectId}": {
+      "schema": "Project",
+      "description": "A workspace collection"
+    },
+    "/shared_playlists/{playlistId}/scripts/{scriptId}": {
+      "schema": "Script",
+      "description": "Collaborative scripts for a shared playlist."
+    },
+    "/shared_playlists/{playlistId}/items/{itemId}": {
+      "schema": "PlaylistItem",
+      "description": "Clips within a shared playlist."
+    },
+    "/shared_playlists/{playlistId}/items/{itemId}/analytics/{eventId}": {
+      "schema": "ListenEvent",
+      "description": "Analytics events for listening."
+    },
+    "/shared_playlists/{playlistId}/items/{itemId}/comments/{commentId}": {
+      "schema": "Comment",
+      "description": "Comments on a clip."
+    },
+    "/review_topics/{topicId}": {
+      "schema": "ReviewTopic",
+      "description": "Topics flagged for spaced repetition review."
+    },
+    "/mastery/{masteryId}": {
+      "schema": "Mastery",
+      "description": "Tracking user mastery per topic."
+    },
+    "/analytics/{analyticId}": {
+      "schema": "Analytics",
+      "description": "Firestore collection for storing analytics data"
+    },
+    "/compliance/{complianceId}": {
+      "schema": "Compliance",
+      "description": "Firestore collection for storing compliance results"
+    },
+    "/contentTasks/{taskId}": {
+      "schema": "ContentTask",
+      "description": "Collection for Kanban content tasks"
+    },
+    "/brandAssets/{assetId}": {
+      "schema": "BrandAsset",
+      "description": "Collection for brand library assets"
+    }
+  }
+}
